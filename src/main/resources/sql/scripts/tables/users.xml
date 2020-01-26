@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <changeSet author="omityushin" id="users">
+        <createTable schemaName="player_events" tableName="users" remarks="Пользователь">
+            <column name="user_id" remarks="Уникальный ID записи" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="user_password" remarks="Пароль" type="varchar(150)">
+            </column>
+            <column name="login" remarks="login" type="varchar(150)">
+            </column>
+            <column name="person_id" remarks="id пользователя" type="int">
+            </column>
+            <column name="delete_date" remarks="Дата удаления" type="DATE">
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

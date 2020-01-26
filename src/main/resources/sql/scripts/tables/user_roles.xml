@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <changeSet author="omityushin" id="user_roles">
+        <createTable schemaName="player_events" tableName="user_roles" remarks="Роли">
+            <column name="user_role_id" remarks="Уникальный ID записи" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="user_id" remarks="Пользователь" type="bigint">
+            </column>
+            <column name="role" remarks="id роли" type="bigint">
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>
