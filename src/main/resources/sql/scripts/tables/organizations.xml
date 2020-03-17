@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <changeSet author="omityushin" id="organizations">
+        <createTable schemaName="player_events" tableName="organizations" remarks="Организации">
+            <column name="organization_id" remarks="Уникальный ID записи" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name_pack" remarks="Наименоавние организации (краткое)" type="varchar(150)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name_full" remarks="Наименоавние организации (полное)" type="varchar(500)">
+            </column>
+            <column name="creation_date" remarks="Дата создания" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" remarks="Создатель" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_updated_by" remarks="Кто обновил запись" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_update_date" remarks="Когда обновил запись" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

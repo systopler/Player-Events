@@ -81,7 +81,9 @@ dependencies {
 
 
     // lombok
-    providedCompile group: 'org.projectlombok', name: 'lombok', version: '1.18.10'
+    providedCompile group: 'org.projectlombok', name: 'lombok', version: '1.18.12'
+    annotationProcessor 'org.projectlombok:lombok:1.18.12'
+
     //Servlet
     providedCompile group: 'javax.servlet', name: 'servlet-api', version: '2.3'
 
