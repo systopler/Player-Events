@@ -7,4 +7,5 @@
     <include file="tables/roles.xml" relativeToChangelogFile="true"/>
     <include file="tables/user_roles.xml" relativeToChangelogFile="true"/>
     <include file="tables/organizations.xml" relativeToChangelogFile="true"/>
+    <include file="tables/people.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>
