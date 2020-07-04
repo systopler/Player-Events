@@ -3,6 +3,7 @@
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
     <!-- Tables with sequences -->
+    <include file="tables/photos.xml" relativeToChangelogFile="true"/>
     <include file="tables/users.xml" relativeToChangelogFile="true"/>
     <include file="tables/roles.xml" relativeToChangelogFile="true"/>
     <include file="tables/user_roles.xml" relativeToChangelogFile="true"/>

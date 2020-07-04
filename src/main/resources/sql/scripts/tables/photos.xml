@@ -3,24 +3,13 @@
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
 
-    <changeSet author="omityushin" id="people">
-        <createTable schemaName="player_events" tableName="people" remarks="Лицо">
-            <column name="person_id" remarks="Уникальный ID записи" type="bigint" autoIncrement="true">
+    <changeSet author="omityushin" id="photos">
+        <createTable schemaName="player_events" tableName="photos" remarks="Фотографии">
+            <column name="photo_id" remarks="Уникальный ID записи" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="last_name" remarks="Фамилия" type="varchar(150)">
+            <column name="img" remarks="blob" type="MEDIUMBLOB">
             </column>
-            <column name="first_name" remarks="Имя" type="varchar(150)">
-            </column>
-            <column name="date_of_birth" remarks="дата рождения" type="DATE">
-            </column>
-            <column name="photo_id" remarks="Фотография" type="bigint">
-            </column>
-            <column name="weight" remarks="вес" type="int">
-            </column>
-            <column name="height" remarks="рост" type="int">
-            </column>
-
             <column name="creation_date" remarks="Дата создания" type="DATETIME">
                 <constraints nullable="false"/>
             </column>

@@ -1,0 +1,40 @@
+/*
+https://blog.hellojs.org/flexbox-sticky-footer-and-react-d116e4cfca5
+*/
+
+.App {
+  text-align: left;
+  width: 100%;
+  height: 100%;
+  /*padding-top: 50px;*/
+  color: black;
+  background-color: #ffffff;
+}
+
+.App-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+.AppBar {
+  min-height: 50px;
+  height: 50px;
+  top: 0px;
+  background-color: ghostwhite;
+}
+
+.ToolBar{
+  height: 50px !important;
+  min-height: 50px !important;
+  background-color: #ffffff;
+}

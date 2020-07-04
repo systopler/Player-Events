@@ -10,10 +10,10 @@
     </appender>
 
     <appender name="fileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${catalina.base}/logs/player-events.log</file>
+        <file>logs/player-events.log</file>
         <append>true</append>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${catalina.base}/logs/player-events.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <fileNamePattern>logs/player-events.%d{yyyy-MM-dd}.log</fileNamePattern>
             <maxHistory>7</maxHistory>
         </rollingPolicy>
         <encoder>
