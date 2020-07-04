@@ -1,5 +1,6 @@
 import React from 'react';
 import {withStyles} from "@material-ui/core";
+import Grid from "@material-ui/core/Grid";
 
 const styles = theme => (
     {
@@ -67,7 +68,26 @@ function Person(
 ){
     return (
         <div>
+            <Grid container
+                  direction="row"
+                  justify="center"
+                  alignItems="center">
+                <Grid item
+                      xs={3}
+                >
 
+                </Grid>
+                <Grid item
+                      xs={6}
+                >
+
+                </Grid>
+                <Grid item
+                      xs={3}
+                >
+
+                </Grid>
+            </Grid>
         </div>
     );
 }
