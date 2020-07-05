@@ -14,8 +14,28 @@
             </column>
             <column name="person_id" remarks="id пользователя" type="int">
             </column>
-            <column name="delete_date" remarks="Дата удаления" type="DATE">
+
+
+            <column name="delete_date" remarks="Дата удаления" type="DATETIME">
+                <constraints nullable="false"/>
             </column>
+
+            <column name="CREATION_DATE" remarks="Дата создания" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATED_BY" remarks="Создатель" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="LAST_UPDATED_BY" remarks="Кто обновил запись" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="LAST_UPDATE_DATE" remarks="Когда обновил запись" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="OBJECT_VERSION_NUMBER" remarks="версия" type="bigint">
+                <constraints nullable="true"/>
+            </column>
+
         </createTable>
     </changeSet>
 </databaseChangeLog>

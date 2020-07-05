@@ -10,18 +10,24 @@
             </column>
             <column name="img" remarks="blob" type="MEDIUMBLOB">
             </column>
-            <column name="creation_date" remarks="Дата создания" type="DATETIME">
+
+            <column name="CREATION_DATE" remarks="Дата создания" type="DATETIME">
                 <constraints nullable="false"/>
             </column>
-            <column name="created_by" remarks="Создатель" type="bigint">
+            <column name="CREATED_BY" remarks="Создатель" type="bigint">
                 <constraints nullable="false"/>
             </column>
-            <column name="last_updated_by" remarks="Кто обновил запись" type="bigint">
+            <column name="LAST_UPDATED_BY" remarks="Кто обновил запись" type="bigint">
                 <constraints nullable="false"/>
             </column>
-            <column name="last_update_date" remarks="Когда обновил запись" type="DATETIME">
+            <column name="LAST_UPDATE_DATE" remarks="Когда обновил запись" type="DATETIME">
                 <constraints nullable="false"/>
             </column>
+            <column name="OBJECT_VERSION_NUMBER" remarks="версия" type="bigint">
+                <constraints nullable="true"/>
+            </column>
+
+
         </createTable>
     </changeSet>
 </databaseChangeLog>

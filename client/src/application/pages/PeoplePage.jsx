@@ -66,6 +66,9 @@ function Person(
         classes
     }
 ){
+
+
+
     return (
         <div>
             <Grid container
@@ -73,17 +76,7 @@ function Person(
                   justify="center"
                   alignItems="center">
                 <Grid item
-                      xs={3}
-                >
-
-                </Grid>
-                <Grid item
-                      xs={6}
-                >
-
-                </Grid>
-                <Grid item
-                      xs={3}
+                      xs={12}
                 >
 
                 </Grid>

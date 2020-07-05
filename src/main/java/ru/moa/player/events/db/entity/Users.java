@@ -2,23 +2,33 @@ package ru.moa.player.events.db.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Setter;
+import ru.moa.player.events.db.entity.common.DeletableEntity;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "users")
 @Setter
-public class Users {
+public class Users extends DeletableEntity<Long> {
+    private String login;
+    private String password;
+
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "user_id")
-    private Long id;
+    public Long getId(){
+        return id;
+    };
+
 
     @Column(name = "login")
-    private String login;
+    public String getLogin() {
+        return login;
+    }
 
     @JsonIgnore
     @Column(name = "user_password")
-    private String password;
-
+    public String getPassword() {
+        return password;
+    }
 }

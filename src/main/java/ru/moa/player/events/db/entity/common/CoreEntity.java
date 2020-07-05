@@ -2,7 +2,7 @@ package ru.moa.player.events.db.entity.common;
 
 import java.io.Serializable;
 
-public class CoreEntry<Id extends Serializable> implements Identifiable<Id> {
+public class CoreEntity<Id extends Serializable> implements Identifiable<Id> {
 
     protected Id id;
     private Integer hashCode = null;
@@ -33,7 +33,7 @@ public class CoreEntry<Id extends Serializable> implements Identifiable<Id> {
 
         if (getClass() != obj.getClass()) return false;
 
-        CoreEntry<?> other = (CoreEntry<?>)obj;
+        CoreEntity<?> other = (CoreEntity<?>)obj;
 
         if (id == null){
             if (other.id != null) return false;
