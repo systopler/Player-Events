@@ -1,7 +1,6 @@
 package ru.moa.player.events.db.entity;
 
 import lombok.Setter;
-import org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy;
 import ru.moa.player.events.db.entity.common.DeletableEntity;
 
 import javax.persistence.*;
@@ -9,7 +8,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "file")
 @Setter
-public class File extends DeletableEntity<Long> {
+public class FileEntity extends DeletableEntity<Long> {
     private String fileName;
     private String fileExt;
     private String mimeType;
