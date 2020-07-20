@@ -1,6 +1,7 @@
 package ru.moa.player.events.db.entity.common;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
@@ -11,6 +12,7 @@ import java.time.LocalDateTime;
 
 @MappedSuperclass
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class BusinessEntity <Id extends Serializable> extends CoreEntity<Id> {
     @Column(name = "CREATED_BY")
     private Long createdBy;

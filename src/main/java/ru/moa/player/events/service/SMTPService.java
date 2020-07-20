@@ -33,6 +33,10 @@ public class SMTPService {
     private void init(){
         props = new Properties();
 
+        //props.put("mail.store.protocol", "pop3");
+        //props.put("mail.transport.protocol", "smtp");
+
+        /*
         props.put("mail.smtp.host", env.getProperty("mail.smtp.host"));
         props.put("mail.smtp.port", env.getProperty("mail.smtp.port"));
         if (env.getProperty("mail.smtp.socketFactory.exists") != null && Boolean.parseBoolean(env.getProperty("mail.smtp.socketFactory.exists"))){
@@ -46,6 +50,18 @@ public class SMTPService {
             props.put("mail.mime.charset", env.getProperty("mail.encoding"));
         }
 
+         */
+
+
+        props.put("mail.pop3.host", "pop.rambler.ru");
+        props.put("mail.pop3.port", 995);
+
+        // SSL setting
+        props.setProperty("mail.pop3.socketFactory.class",
+                "javax.net.ssl.SSLSocketFactory");
+        props.setProperty("mail.pop3.socketFactory.fallback", "false");
+        props.setProperty("mail.pop3.socketFactory.port", String.valueOf(995));
+
         userName = env.getProperty("mail.smtp.userName");
         password = env.getProperty("mail.smtp.password");
         mailFrom = env.getProperty("mail.from");
@@ -56,7 +72,7 @@ public class SMTPService {
         }
     }
 
-    private Session getSession(){
+    public Session getSession(){
         log.debug("props: {}", props);
         if (userName != null) {
             return Session.getInstance(props,
@@ -92,7 +108,7 @@ public class SMTPService {
             message.setSubject(subject);
             message.setText(text);
 
-            log.debug("message.getAllRecipients(): {}", message.getAllRecipients());
+            //log.debug("message.getAllRecipients(): {}", message.getAllRecipients());
             log.debug("message: {}", message);
 
             Transport.send(message);

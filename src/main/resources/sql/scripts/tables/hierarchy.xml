@@ -3,18 +3,18 @@
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
 
-    <changeSet author="omityushin" id="people">
-        <createTable schemaName="player_events" tableName="people" remarks="Лицо">
-            <column name="person_id" remarks="Уникальный ID записи" type="bigint" autoIncrement="true">
+    <changeSet author="omityushin" id="hierarchy">
+        <createTable schemaName="player_events" tableName="hierarchy" remarks="иерархия">
+            <column name="hierarchy_id" remarks="Уникальный ID записи" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="last_name" remarks="Фамилия" type="varchar(150)">
+            <column name="hierarchy_type_id" remarks="Тип" type="bigint">
+                <constraints nullable="false"/>
             </column>
-            <column name="first_name" remarks="Имя" type="varchar(150)">
+            <column name="parent_id" remarks="id родительского элемента" type="bigint">
             </column>
-            <column name="date_of_birth" remarks="дата рождения" type="DATE">
-            </column>
-            <column name="photo_id" remarks="Фотография" type="bigint">
+            <column name="children_id" remarks="id дочернего элемента" type="bigint">
+                <constraints nullable="false"/>
             </column>
 
             <column name="CREATION_DATE" remarks="Дата создания" type="DATETIME">
@@ -32,10 +32,14 @@
             <column name="OBJECT_VERSION_NUMBER" remarks="версия" type="bigint">
                 <constraints nullable="false"/>
             </column>
+
             <column name="delete_date" remarks="Дата удаления" type="DATETIME">
                 <constraints nullable="true"/>
             </column>
-
         </createTable>
+
+        <createIndex tableName="hierarchy" indexName="hierarchys_n1">
+            <column name="hierarchy_type_id"/>
+        </createIndex>
     </changeSet>
 </databaseChangeLog>

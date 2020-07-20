@@ -7,6 +7,12 @@
     <include file="tables/users.xml" relativeToChangelogFile="true"/>
     <include file="tables/roles.xml" relativeToChangelogFile="true"/>
     <include file="tables/user_roles.xml" relativeToChangelogFile="true"/>
+    <include file="tables/organization_types.xml" relativeToChangelogFile="true"/>
     <include file="tables/organizations.xml" relativeToChangelogFile="true"/>
     <include file="tables/people.xml" relativeToChangelogFile="true"/>
+    <include file="tables/hierarchy_types.xml" relativeToChangelogFile="true"/>
+    <include file="tables/hierarchy.xml" relativeToChangelogFile="true"/>
+    <include file="tables/contact_types.xml" relativeToChangelogFile="true"/>
+    <include file="tables/contacts.xml" relativeToChangelogFile="true"/>
+    <include file="tables/files.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>

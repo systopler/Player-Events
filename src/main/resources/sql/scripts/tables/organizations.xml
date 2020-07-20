@@ -13,6 +13,9 @@
             </column>
             <column name="name_full" remarks="Наименоавние организации (полное)" type="varchar(500)">
             </column>
+            <column name="organization_type_id" remarks="Тип организации" type="bigint">
+            </column>
+
 
             <column name="CREATION_DATE" remarks="Дата создания" type="DATETIME">
                 <constraints nullable="false"/>
@@ -33,8 +36,6 @@
             <column name="delete_date" remarks="Дата удаления" type="DATETIME">
                 <constraints nullable="true"/>
             </column>
-
-
         </createTable>
     </changeSet>
 </databaseChangeLog>

@@ -34,7 +34,7 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-aop'
-    implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
@@ -51,6 +51,8 @@ dependencies {
     //Datasource
     compile group: 'com.zaxxer', name: 'HikariCP', version: '3.4.2'
 
+    // mail
+    compile group: 'javax.mail', name: 'mail', version: '1.5.0-b01'
 
 
     // liquibase
@@ -60,5 +62,7 @@ dependencies {
     compile group: 'org.modelmapper', name: 'modelmapper', version: '2.3.6'
 
 
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+    // test
+    testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '2.3.1.RELEASE'
+
 }
