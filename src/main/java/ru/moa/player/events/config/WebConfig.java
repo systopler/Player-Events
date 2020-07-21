@@ -12,6 +12,7 @@ import org.springframework.web.servlet.config.annotation.DefaultServletHandlerCo
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import ru.moa.player.events.util.DataObjectMapper;
 
 import java.util.List;
@@ -61,4 +62,13 @@ public class WebConfig implements WebMvcConfigurer {
         converters.add(customJackson2HttpMessageConverter());
         converters.add(new StringHttpMessageConverter());
     }
+
+    @Bean
+    public InternalResourceViewResolver jspViewResolver() {
+        InternalResourceViewResolver bean = new InternalResourceViewResolver();
+        bean.setPrefix("/WEB-INF/pages/");
+        bean.setSuffix(".jsp");
+        return bean;
+    }
+
 }
