@@ -16,6 +16,8 @@
             </column>
             <column name="photo_id" remarks="Фотография" type="bigint">
             </column>
+            <column name="sex" remarks="пол" type="bigint">
+            </column>
 
             <column name="CREATION_DATE" remarks="Дата создания" type="DATETIME">
                 <constraints nullable="false"/>

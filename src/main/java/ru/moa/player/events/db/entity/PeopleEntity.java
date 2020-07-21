@@ -5,6 +5,7 @@ import ru.moa.player.events.db.entity.common.DeletableEntity;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "people")
@@ -13,6 +14,8 @@ public class PeopleEntity extends DeletableEntity<Long> {
     private String lastName;
     private String firstName;
     private LocalDate dateOfBirth;
+
+    private List<ContactEntity> contactEntityList;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,4 +39,12 @@ public class PeopleEntity extends DeletableEntity<Long> {
     public LocalDate getDateOfBirth(){
         return this.dateOfBirth;
     }
+
+    /*
+    @OneToMany(mappedBy = "contact", cascade = CascadeType.ALL, orphanRemoval = true)
+    public List<ContactEntity> getContactEntityList() {
+        return contactEntityList;
+    }
+
+     */
 }

@@ -15,4 +15,5 @@
     <include file="tables/contact_types.xml" relativeToChangelogFile="true"/>
     <include file="tables/contacts.xml" relativeToChangelogFile="true"/>
     <include file="tables/files.xml" relativeToChangelogFile="true"/>
+    <include file="tables/sex_types.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>

@@ -1,10 +1,15 @@
 package ru.moa.player.events.service;
 
+import liquibase.util.file.FilenameUtils;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+import ru.moa.player.events.db.entity.FileEntity;
 import ru.moa.player.events.db.repository.FileRepository;
 
 import javax.servlet.ServletContext;
+import java.io.File;
+import java.io.IOException;
 
 @AllArgsConstructor
 @Service
@@ -13,49 +18,42 @@ public class FileService {
 
     private final ServletContext context;
 
-    @Transactional(readOnly = true)
-    public FndFile findOne(Long id){
-        // TODO
-        return fndFileRepository.findById(id).get();
-    }
+    public FileEntity save(MultipartFile inputFile) throws IOException {
+        FileEntity fileEntity = new FileEntity();
 
-    public FndFile save(MultipartFile inputFile) throws IOException {
-        FndFile fileInfo = new FndFile();
-
-        fileInfo.setFileName(FilenameUtils.removeExtension(FilenameUtils.getName(inputFile.getOriginalFilename())));
-        fileInfo.setSize(inputFile.getSize());
-        fileInfo.setMimeType(inputFile.getContentType());
-        fileInfo.setFileExt(FilenameUtils.getExtension(inputFile.getOriginalFilename()));
-        fileInfo = save(fileInfo);
+        fileEntity.setFileName(FilenameUtils.removeExtension(FilenameUtils.getName(inputFile.getOriginalFilename())));
+        fileEntity.setSize(inputFile.getSize());
+        fileEntity.setMimeType(inputFile.getContentType());
+        fileEntity.setFileExt(FilenameUtils.getExtension(inputFile.getOriginalFilename()));
+        fileEntity = save(fileEntity);
 
         // copy file
-        inputFile.transferTo(getFile(fileInfo));
+        inputFile.transferTo(getFile(fileEntity));
 
-        return fileInfo;
+        return fileEntity;
     }
 
+    public FileEntity save(FileEntity fileEntity){
+        return fileRepository.save(fileEntity);
+    }
 
-
-
-    private File getFile(FndFile fndFile) {
+    private File getFile(FileEntity fndFile) {
         return new File(context.getRealPath("/files")+  File.separator + fndFile.getId() + "." +fndFile.getFileExt());
     }
 
-    @Transactional
-    public FndFile save(FndFile fndFile){
-        return fndFileRepository.save(fndFile);
-    }
-
     public void delete(Long id){
-        delete(findOne(id));
+        delete(findById(id));
     }
 
-    public void delete(FndFile fndFile){
+    public void delete(FileEntity fndFile){
         File file = getFile(fndFile);
         if (file.exists()){
             file.delete();
         }
-        fndFileRepository.delete(fndFile);
+        fileRepository.delete(fndFile);
     }
 
+    public FileEntity findById(Long id){
+        return fileRepository.getOne(id);
+    }
 }

@@ -3,12 +3,19 @@
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
 
-    <changeSet author="omityushin" id="contact_types">
-        <createTable schemaName="player_events" tableName="contact_types" remarks="связь">
-            <column name="contact_type_id" remarks="Уникальный ID записи" type="bigint" autoIncrement="true">
+    <property  name="clob.type"  value="clob"  dbms="oracle,postgresql"/>
+    <property  name="clob.type"  value="longtext"  dbms="mysql"/>
+
+    <changeSet author="omityushin" id="messages">
+        <createTable schemaName="player_events" tableName="messages" remarks="сообщения">
+            <column name="message_id" remarks="Уникальный ID записи" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="meaning" remarks="Наименование" type="varchar(150)">
+            <column name="header" remarks="наименование" type="varchar(150)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="body" remarks="текст" type="${blob_type}">
                 <constraints nullable="false"/>
             </column>
 
@@ -32,6 +39,5 @@
                 <constraints nullable="true"/>
             </column>
         </createTable>
-
     </changeSet>
 </databaseChangeLog>

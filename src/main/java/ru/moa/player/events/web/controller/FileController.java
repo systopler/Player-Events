@@ -1,19 +1,28 @@
 package ru.moa.player.events.web.controller;
 
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.util.FileCopyUtils;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import ru.moa.player.events.db.entity.FileEntity;
 import ru.moa.player.events.service.FileService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 
 @Slf4j
+@AllArgsConstructor
 @RestController
 public class FileController {
-    private FileService fileService;
+    private final FileService fileService;
 
     @GetMapping(value = "/file/download/{fileId}", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
     public void getFile(
@@ -25,11 +34,11 @@ public class FileController {
 
 
         try {
-            FndFile fndFile = fndFileService.findOne(fileId);
-            LOGGER.debug("getFile: {}/files/{}.{}", request.getRealPath("/"), fileId, fndFile.getFileExt());
+            FileEntity fileEntity = fileService.findById(fileId);
+            log.debug("getFile: {}/files/{}.{}", request.getRealPath("/"), fileId, fileEntity.getFileExt());
 
 
-            File file = new File(String.format("%s/files/%s.%s", request.getRealPath("/"), fileId, fndFile.getFileExt()));
+            File file = new File(String.format("%s/files/%s.%s", request.getRealPath("/"), fileId, fileEntity.getFileExt()));
 
             System.out.println("The length of the file is : " + file.length());
 
@@ -44,14 +53,14 @@ public class FileController {
             FileCopyUtils.copy(new FileInputStream(file), response.getOutputStream());
 
         } catch (IOException e) {
-            LOGGER.error(e.getMessage(), e);
+            log.error(e.getMessage(), e);
         }
 
         //return new ResponseEntity<>(HttpStatus.CONFLICT);
     }
 
     @PostMapping(value = "/file/upload", headers=("content-type=multipart/*"))
-    public ResponseEntity<FndFile> upload(@RequestParam("file") MultipartFile inputFile) {
+    public ResponseEntity<FileEntity> upload(@RequestParam("file") MultipartFile inputFile) {
         HttpHeaders headers = new HttpHeaders();
         //headers.add("Access-Control-Allow-Origin", "*");
         headers.add("Access-Control-Allow-Methods", "GET, POST, PUT");
@@ -60,7 +69,7 @@ public class FileController {
         if (!inputFile.isEmpty()) {
             try {
 
-                return new ResponseEntity<>(fndFileService.save(inputFile), headers, HttpStatus.OK);
+                return new ResponseEntity<>(fileService.save(inputFile), headers, HttpStatus.OK);
                 //return new ResponseEntity<>(fndFileService.save(inputFile), CorsHeaders.corsHeaders(), HttpStatus.OK);
             } catch (Exception e) {
                 return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -70,9 +79,10 @@ public class FileController {
         }
     }
 
+
     @DeleteMapping(value = "/file/delete/{fileId}")
     public void getFile(@PathVariable long fileId){
-        fndFileService.delete(fileId);
+        fileService.delete(fileId);
     }
 
 }

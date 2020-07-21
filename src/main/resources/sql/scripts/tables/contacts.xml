@@ -5,7 +5,7 @@
 
     <changeSet author="omityushin" id="contacts">
         <createTable schemaName="player_events" tableName="contacts" remarks="связь">
-            <column name="connection_id" remarks="Уникальный ID записи" type="bigint" autoIncrement="true">
+            <column name="contact_id" remarks="Уникальный ID записи" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="object_type" remarks="Тип" type="varchar(150)">
