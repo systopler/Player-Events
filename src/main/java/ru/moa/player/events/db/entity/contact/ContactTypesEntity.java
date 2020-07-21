@@ -1,4 +1,4 @@
-package ru.moa.player.events.db.entity;
+package ru.moa.player.events.db.entity.contact;
 
 import lombok.Setter;
 import ru.moa.player.events.db.entity.common.DeletableEntity;
