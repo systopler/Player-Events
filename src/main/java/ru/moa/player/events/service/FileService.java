@@ -34,6 +34,9 @@ public class FileService {
         return fileInfo;
     }
 
+
+
+
     private File getFile(FndFile fndFile) {
         return new File(context.getRealPath("/files")+  File.separator + fndFile.getId() + "." +fndFile.getFileExt());
     }
