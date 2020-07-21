@@ -70,5 +70,6 @@ public class PersonEntity extends DeletableEntity<Long> {
                 }
             }
         }
+        throw new IllegalArgumentException("Person doesn't have associated contacts");
     }
 }
