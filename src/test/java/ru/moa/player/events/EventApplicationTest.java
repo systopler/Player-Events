@@ -111,7 +111,15 @@ public class EventApplicationTest {
         personEntity.setLastName("Митюшин");
         personEntity.setFirstName("Олег");
         personEntity.setVersion(1L);
-        //peopleRepository.save(personEntity);
+
+        PersonContactEntity contact = new PersonContactEntity();
+        contact.setObjectType("PERSON");
+        contact.setVersion(1L);
+        contact.setContactTypesEntity(contactTypesRepository.getOne(1L));
+        contact.setValue("23232323");
+        personEntity.addContact(contact);
+
+        peopleRepository.save(personEntity);
     }
 
     @Test
@@ -121,11 +129,11 @@ public class EventApplicationTest {
         PersonContactEntity contact = new PersonContactEntity();
         //contact.setObjectType("PERSON");
         contact.setPerson(new PersonEntity());
-        contact.setVersion(1L);
+        //contact.setVersion(1L);
         contact.setContactTypesEntity(contactTypes);
 
         System.out.println(String.format("contactTypes = %s", contact.toString()));
 
-        contactRepository.save(contact);
+        //contactRepository.save(contact);
     }
 }

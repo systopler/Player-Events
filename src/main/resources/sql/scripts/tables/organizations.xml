@@ -15,6 +15,8 @@
             </column>
             <column name="organization_type_id" remarks="Тип организации" type="bigint">
             </column>
+            <column name="parent_id" remarks="Родительская организация" type="bigint">
+            </column>
 
 
             <column name="CREATION_DATE" remarks="Дата создания" type="DATETIME">
@@ -37,5 +39,12 @@
                 <constraints nullable="true"/>
             </column>
         </createTable>
+
+        <createIndex tableName="organizations" indexName="organizations_n1">
+            <column name="parent_id"/>
+        </createIndex>
+        <createIndex tableName="organizations" indexName="organizations_n2">
+            <column name="name_pack"/>
+        </createIndex>
     </changeSet>
 </databaseChangeLog>

@@ -12,7 +12,7 @@ import javax.persistence.*;
 @DiscriminatorColumn(name = "object_type")
 @Table(name = "contacts")
 @Setter
-//@ToString(callSuper = true)
+@ToString(callSuper = true)
 public class ContactEntity extends DeletableEntity<Long> {
     private ContactTypesEntity contactTypesEntity;
     private String objectType;

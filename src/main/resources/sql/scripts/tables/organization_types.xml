@@ -8,7 +8,7 @@
             <column name="organization_type_id" remarks="Уникальный ID записи" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="name" remarks="Наименоавние" type="varchar(150)">
+            <column name="meaning" remarks="Наименоавние" type="varchar(150)">
                 <constraints nullable="false"/>
             </column>
 

@@ -2,14 +2,16 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
-    <changeSet author="omityushin" id="sex_types-values-0001-01">
+    <changeSet author="omityushin" id="organization_types-values-0001-01">
         <sql>
-            insert into sex_types(
+            insert into organization_types(
             meaning, CREATED_BY, CREATION_DATE, LAST_UPDATED_BY, LAST_UPDATE_DATE, object_version_number
             )
             values
-            ('Мужской', '1', current_timestamp, '1', current_timestamp, 1),
-            ('Женский', '1', current_timestamp, '1', current_timestamp, 1);
+            ('Клуб', '1', current_timestamp, '1', current_timestamp, 1),
+            ('Команда', '1', current_timestamp, '1', current_timestamp, 1),
+            ('Состав', '1', current_timestamp, '1', current_timestamp, 1)
+            ;
         </sql>
     </changeSet>
 </databaseChangeLog>
