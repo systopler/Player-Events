@@ -1,7 +1,10 @@
 package ru.moa.player.events.db.entity.common;
 
+import lombok.ToString;
+
 import java.io.Serializable;
 
+@ToString(of = {"id"})
 public class CoreEntity<Id extends Serializable> implements Identifiable<Id> {
 
     protected Id id;

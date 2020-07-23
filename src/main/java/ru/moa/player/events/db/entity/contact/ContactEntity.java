@@ -1,6 +1,8 @@
 package ru.moa.player.events.db.entity.contact;
 
+import lombok.EqualsAndHashCode;
 import lombok.Setter;
+import lombok.ToString;
 import ru.moa.player.events.db.entity.common.DeletableEntity;
 
 import javax.persistence.*;
@@ -10,9 +12,11 @@ import javax.persistence.*;
 @DiscriminatorColumn(name = "object_type")
 @Table(name = "contacts")
 @Setter
+//@ToString(callSuper = true)
 public class ContactEntity extends DeletableEntity<Long> {
     private ContactTypesEntity contactTypesEntity;
     private String objectType;
+    private String value;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,8 +26,8 @@ public class ContactEntity extends DeletableEntity<Long> {
         return super.getId();
     }
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "contact_type_id", referencedColumnName = "id")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "contact_type_id")
     public ContactTypesEntity getContactTypesEntity() {
         return contactTypesEntity;
     }
@@ -32,5 +36,10 @@ public class ContactEntity extends DeletableEntity<Long> {
     @Column(name = "object_type", insertable = false, updatable = false)
     public String getObjectType() {
         return objectType;
+    }
+
+    @Column(name = "contact_value")
+    public String getValue() {
+        return value;
     }
 }

@@ -4,12 +4,12 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
     <changeSet author="omityushin" id="db-change-log-values-0001-01">
         <sql>
-            insert into sex_types(
+            insert into contact_types(
             meaning, CREATED_BY, CREATION_DATE, LAST_UPDATED_BY, LAST_UPDATE_DATE, object_version_number
             )
             values
-            ('Мужской', '1', current_timestamp, '1', current_timestamp, 1),
-            ('Женский', '1', current_timestamp, '1', current_timestamp, 1);
+            ('email', '1', current_timestamp, '1', current_timestamp, 1),
+            ('телефон', '1', current_timestamp, '1', current_timestamp, 1);
         </sql>
     </changeSet>
 </databaseChangeLog>

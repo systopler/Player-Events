@@ -1,6 +1,7 @@
 package ru.moa.player.events.db.entity.contact;
 
 import lombok.Setter;
+import lombok.ToString;
 import ru.moa.player.events.db.entity.common.DeletableEntity;
 
 import javax.persistence.*;
@@ -8,9 +9,9 @@ import javax.persistence.*;
 @Entity
 @Table(name = "contact_types")
 @Setter
+@ToString(callSuper = true)
 public class ContactTypesEntity extends DeletableEntity<Long> {
-    @OneToOne(mappedBy = "contactTypesEntity")
-    private ContactEntity contactEntity;
+    private String meaning;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,5 +19,10 @@ public class ContactTypesEntity extends DeletableEntity<Long> {
     @Override
     public Long getId() {
         return super.getId();
+    }
+
+    @Column(name = "meaning")
+    public String getMeaning() {
+        return meaning;
     }
 }

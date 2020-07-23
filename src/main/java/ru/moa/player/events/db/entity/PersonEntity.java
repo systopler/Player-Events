@@ -1,15 +1,10 @@
 package ru.moa.player.events.db.entity;
 
 import lombok.Setter;
-import org.hibernate.annotations.Where;
 import ru.moa.player.events.db.entity.common.DeletableEntity;
-import ru.moa.player.events.db.entity.contact.PersonContactEntity;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 
 @Entity
 @Table(name = "people")
@@ -19,7 +14,7 @@ public class PersonEntity extends DeletableEntity<Long> {
     private String firstName;
     private LocalDate dateOfBirth;
 
-    private List<PersonContactEntity> contacts;
+    //private List<PersonContactEntity> contacts;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,7 +39,9 @@ public class PersonEntity extends DeletableEntity<Long> {
         return this.dateOfBirth;
     }
 
-    @OneToMany(mappedBy = "personEntity", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+
+    /*
+    @OneToMany(mappedBy = "person", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @Where(clause="object_type='PERSON'")
     public List<PersonContactEntity> getContacts() {
         return contacts;
@@ -72,4 +69,6 @@ public class PersonEntity extends DeletableEntity<Long> {
         }
         throw new IllegalArgumentException("Person doesn't have associated contacts");
     }
+
+     */
 }

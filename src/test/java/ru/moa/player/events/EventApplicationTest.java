@@ -5,7 +5,14 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import ru.moa.player.events.enums.ProtocolEnum;
+import org.springframework.transaction.annotation.Transactional;
+import ru.moa.player.events.db.entity.PersonEntity;
+import ru.moa.player.events.db.entity.contact.ContactEntity;
+import ru.moa.player.events.db.entity.contact.ContactTypesEntity;
+import ru.moa.player.events.db.entity.contact.PersonContactEntity;
+import ru.moa.player.events.db.repository.ContactRepository;
+import ru.moa.player.events.db.repository.ContactTypesRepository;
+import ru.moa.player.events.db.repository.PeopleRepository;
 import ru.moa.player.events.service.SMTPService;
 
 import javax.mail.*;
@@ -13,15 +20,22 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.search.FlagTerm;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class EventApplicationTest {
     @Autowired
     private SMTPService smtpService;
+
+    @Autowired
+    private ContactRepository contactRepository;
+
+    @Autowired
+    private ContactTypesRepository contactTypesRepository;
+
+    @Autowired
+    private PeopleRepository peopleRepository;
+
 
     private void deleteByFrom(Message[] messages, String address) throws AddressException {
         InternetAddress from = new InternetAddress(address);
@@ -73,6 +87,7 @@ public class EventApplicationTest {
         }
          */
 
+        /*
         deleteByFrom(messages, "Nataly.Kapishnikova@svyazintek.ru");
         deleteByFrom(messages, "nkapishnikova@at-consulting.ru");
         deleteByFrom(messages, "info@site.hh.ru");
@@ -80,10 +95,37 @@ public class EventApplicationTest {
         deleteByFrom(messages, "Tatiana.Naumova@svyazintek.ru");
         deleteByFrom(messages, "omityushin@oebs.sinvest.ru");
 
+         */
+
         
 
         //inbox.setFlags(n, n, new Flags(Flags.Flag.DELETED), true);
         inbox.close(true);
         store.close();
+    }
+
+    @Test
+    @Transactional
+    public void addPerson(){
+        PersonEntity personEntity = new PersonEntity();
+        personEntity.setLastName("Митюшин");
+        personEntity.setFirstName("Олег");
+        personEntity.setVersion(1L);
+        //peopleRepository.save(personEntity);
+    }
+
+    @Test
+    @Transactional
+    public void addContact(){
+        ContactTypesEntity contactTypes = contactTypesRepository.getOne(1L);
+        PersonContactEntity contact = new PersonContactEntity();
+        //contact.setObjectType("PERSON");
+        contact.setPerson(new PersonEntity());
+        contact.setVersion(1L);
+        contact.setContactTypesEntity(contactTypes);
+
+        System.out.println(String.format("contactTypes = %s", contact.toString()));
+
+        contactRepository.save(contact);
     }
 }
