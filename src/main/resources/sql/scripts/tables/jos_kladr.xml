@@ -4,8 +4,8 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
 
     <changeSet author="omityushin" id="jos_kladr">
-        <createTable schemaName="master" tableName="jos_kladr" remarks="кладр">
-            <column name="name" remarks="Наименование" type="varchar(50)" autoIncrement="true">
+        <createTable schemaName="player_events" tableName="jos_kladr" remarks="кладр">
+            <column name="name" remarks="Наименование" type="varchar(50)">
                 <constraints nullable="false"/>
             </column>
             <column name="socr" remarks="тип объекта" type="varchar(30)" />
@@ -13,7 +13,7 @@
             <column name="index" remarks="индекс" type="varchar(6)" />
             <column name="gninmb" remarks="" type="varchar(4)" />
             <column name="uno" remarks="" type="varchar(4)" />
-            <column name="ocatd" remarks="" type="varchar(4)" />
+            <column name="ocatd" remarks="" type="varchar(11)" />
             <column name="status" remarks="" type="int" />
         </createTable>
 

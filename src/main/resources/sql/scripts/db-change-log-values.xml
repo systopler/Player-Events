@@ -5,5 +5,5 @@
     <include file="values/sex_types.xml" relativeToChangelogFile="true"/>
     <include file="values/contact_types.xml" relativeToChangelogFile="true"/>
     <include file="values/organization_types.xml" relativeToChangelogFile="true"/>
-    <include file="values/jos_kladr.sql" relativeToChangelogFile="true"/>
+    <include file="values/jos_kladr.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>

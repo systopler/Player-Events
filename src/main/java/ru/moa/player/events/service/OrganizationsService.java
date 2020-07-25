@@ -64,7 +64,6 @@ public class OrganizationsService {
     }
 
     public OrganizationEntity findById(Long id){
-
         return organizationsRepository.findById(id).orElseThrow(()-> new NotFoundException(messageService.getMessage("entity.not.found.exception")));
     }
 

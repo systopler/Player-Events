@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <changeSet author="omityushin" id="organization_aliases">
+        <createTable schemaName="player_events" tableName="organization_aliases" remarks="тип организации">
+            <column name="organization_alias_id" remarks="Уникальный ID записи" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="organization_id" remarks="Организация" type="bigint" />
+            <column name="meaning" remarks="Наименоавние" type="varchar(150)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="CREATION_DATE" remarks="Дата создания" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATED_BY" remarks="Создатель" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="LAST_UPDATED_BY" remarks="Кто обновил запись" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="LAST_UPDATE_DATE" remarks="Когда обновил запись" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="OBJECT_VERSION_NUMBER" remarks="версия" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="delete_date" remarks="Дата удаления" type="DATETIME">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+        <createIndex tableName="organization_aliases" indexName="organization_aliases_n1">
+            <column name="organization_id"/>
+        </createIndex>
+    </changeSet>
+</databaseChangeLog>

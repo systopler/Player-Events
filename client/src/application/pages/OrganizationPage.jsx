@@ -11,6 +11,8 @@ import AddIcon from "@material-ui/icons/Add";
 import TableBody from "@material-ui/core/TableBody";
 import CreateIcon from "@material-ui/icons/Create";
 import OrganizationDialog from "./dialogs/OrganizationDialog";
+import MLabel from "../../components/elements/MLabel";
+import MTextField from "../../components/elements/MTextField";
 
 const useStyles = makeStyles(
     theme => (
@@ -71,7 +73,7 @@ export default function OrganizationsPage(
             <Grid container
                   direction="column"
                   justify="center"
-                  alignItems="center"
+                  alignItems="stretch"
             >
                 <Grid item
                       xs={12}
@@ -79,7 +81,7 @@ export default function OrganizationsPage(
                     <Grid container
                           direction="row"
                           justify="center"
-                          alignItems="center"
+                          alignItems="stretch"
                     >
                         <Grid item
                               xs={4}
@@ -89,7 +91,52 @@ export default function OrganizationsPage(
                         <Grid item
                               xs={8}
                         >
-
+                            <Grid container
+                                  direction="column"
+                                  justify="center"
+                                  alignItems="stretch"
+                            >
+                                <Grid item
+                                      xs={12}
+                                >
+                                    <Grid container
+                                          direction="row"
+                                          justify="center"
+                                          alignItems="stretch"
+                                    >
+                                        <Grid item
+                                              xs={4}
+                                        >
+                                            <MLabel>Краткое наименование</MLabel>
+                                        </Grid>
+                                        <Grid item
+                                              xs={8}
+                                        >
+                                            <MTextField fullWidth />
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+                                <Grid item
+                                      xs={12}
+                                >
+                                    <Grid container
+                                          direction="row"
+                                          justify="center"
+                                          alignItems="stretch"
+                                    >
+                                        <Grid item
+                                              xs={4}
+                                        >
+                                            <MLabel>Полное наименование</MLabel>
+                                        </Grid>
+                                        <Grid item
+                                              xs={8}
+                                        >
+                                            <MTextField fullWidth />
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
                         </Grid>
                     </Grid>
                 </Grid>

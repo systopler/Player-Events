@@ -17,6 +17,7 @@
             </column>
             <column name="parent_id" remarks="Родительская организация" type="bigint">
             </column>
+            <column name="date_of_birth" remarks="Дата рождения" type="DATE" />
 
 
             <column name="CREATION_DATE" remarks="Дата создания" type="DATETIME">
