@@ -6,6 +6,8 @@ import {Route, Switch} from "react-router";
 const NotFoundPage = lazy(() => import("../application/pages/NotFoundPage"))
 const PeoplePage = lazy(() => import("../application/pages/PeoplePage"))
 const PersonPage = lazy(() => import("../application/pages/PersonPage"))
+const OrganizationsPage = lazy(() => import("../application/pages/OrganizationsPage"))
+const OrganizationPage = lazy(() => import("../application/pages/OrganizationPage"))
 
 let history = createHistory();
 
@@ -16,6 +18,9 @@ class Routes extends Component {
                 <Switch history={history}>
                     <Route exact path='/' component={PeoplePage}/>
                     <Route path='/person' component={PersonPage}/>
+                    <Route path='/organizations' component={OrganizationsPage} />
+                    <Route path='/organization/:id' component={OrganizationPage}/>
+                    <Route path='/organization' component={OrganizationPage}/>
                     <Route component={NotFoundPage}/>
                 </Switch>
             </Suspense>
