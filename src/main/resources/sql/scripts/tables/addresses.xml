@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <changeSet author="omityushin" id="address_01">
+        <createTable schemaName="master" tableName="addresses" remarks="контактная информация">
+            <column name="address_id" remarks="Уникальный ID записи" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="object_type" remarks="тип объекта" type="varchar(30)">
+            </column>
+            <column name="object_id" remarks="id владельца" type="bigint">
+            </column>
+            <column name="address_type" remarks="тип объекта" type="bigint">
+            </column>
+            <column name="region" remarks="регион" type="varchar(13)">
+            </column>
+            <column name="raion" remarks="район" type="varchar(13)">
+            </column>
+            <column name="city" remarks="город" type="varchar(13)">
+            </column>
+            <column name="town" remarks="населенный пункт" type="varchar(13)">
+            </column>
+            <column name="street" remarks="Улица" type="varchar(17)">
+            </column>
+            <column name="house" remarks="Дом" type="varchar(10)">
+            </column>
+            <column name="housing" remarks="Корпус" type="varchar(10)">
+            </column>
+            <column name="flat" remarks="Квартира" type="varchar(10)">
+            </column>
+
+            <column name="CREATION_DATE" remarks="Дата создания" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATED_BY" remarks="Создатель" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="LAST_UPDATED_BY" remarks="Кто обновил запись" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="LAST_UPDATE_DATE" remarks="Когда обновил запись" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="OBJECT_VERSION_NUMBER" remarks="версия" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="delete_date" remarks="Дата удаления" type="DATETIME">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+
+        <createIndex tableName="addresses"
+                     indexName="addresses_n1">
+            <column name="object_type"/>
+            <column name="object_id"/>
+        </createIndex>
+    </changeSet>
+</databaseChangeLog>

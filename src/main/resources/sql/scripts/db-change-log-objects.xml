@@ -16,4 +16,6 @@
     <include file="tables/contacts.xml" relativeToChangelogFile="true"/>
     <include file="tables/files.xml" relativeToChangelogFile="true"/>
     <include file="tables/sex_types.xml" relativeToChangelogFile="true"/>
+    <include file="tables/jos_kladr.xml" relativeToChangelogFile="true"/>
+
 </databaseChangeLog>
