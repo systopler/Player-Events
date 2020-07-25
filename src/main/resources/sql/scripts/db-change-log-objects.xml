@@ -18,5 +18,5 @@
     <include file="tables/sex_types.xml" relativeToChangelogFile="true"/>
     <include file="tables/organization_aliases.xml" relativeToChangelogFile="true"/>
     <include file="tables/jos_kladr.xml" relativeToChangelogFile="true"/>
-
+    <include file="tables/jos_kladr_socrbase.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>
