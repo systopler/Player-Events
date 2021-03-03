@@ -1,33 +1,26 @@
 package ru.moa.player.events.db.entity.common;
 
-import lombok.Data;
-
-import javax.persistence.Column;
-import javax.persistence.MappedSuperclass;
-import javax.persistence.PrePersist;
-import javax.persistence.Version;
+import javax.persistence.*;
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.text.MessageFormat;
 
 @MappedSuperclass
 public class VersionedEntity <Id extends Serializable> extends BusinessEntity<Id>{
     @Version
-    private Long version;
+    private Long objectVersionNumber;
 
     @Column(name = "OBJECT_VERSION_NUMBER", nullable = false)
-    public Long getVersion() {
-        return version;
+    public Long getObjectVersionNumber() {
+        return objectVersionNumber;
     }
 
-    public void setVersion(Long version) {
-        this.version = version;
+    public void setObjectVersionNumber(Long version) {
+        this.objectVersionNumber = version;
     }
 
-    /*
-    @PrePersist
-    public void prePersist(){
-        this.version = 1L;
+    public void applyObjectVersionNumber(Long objectVersionNumber) {
+        if (!this.objectVersionNumber.equals(objectVersionNumber)) {
+            throw new OptimisticLockException(MessageFormat.format("Stale entity {0}: applied version {1}, but current version is {2}", this.getClass().getSimpleName(), objectVersionNumber, this.objectVersionNumber));
+        }
     }
-
-     */
 }

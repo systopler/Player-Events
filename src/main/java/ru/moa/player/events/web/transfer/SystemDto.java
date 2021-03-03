@@ -1,4 +1,4 @@
-package ru.moa.player.events.dto;
+package ru.moa.player.events.web.transfer;
 
 import lombok.Builder;
 import lombok.Data;

@@ -19,4 +19,8 @@
     <include file="tables/organization_aliases.xml" relativeToChangelogFile="true"/>
     <include file="tables/jos_kladr.xml" relativeToChangelogFile="true"/>
     <include file="tables/jos_kladr_socrbase.xml" relativeToChangelogFile="true"/>
+    <include file="tables/addresses.xml" relativeToChangelogFile="true"/>
+    <include file="tables/person_document_types.xml" relativeToChangelogFile="true"/>
+    <include file="tables/person_documents.xml" relativeToChangelogFile="true"/>
+    <include file="tables/organization_colors.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>

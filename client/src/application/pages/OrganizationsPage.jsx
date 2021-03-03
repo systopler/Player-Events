@@ -1,7 +1,6 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import Grid from "@material-ui/core/Grid";
-import {makeStyles} from "@material-ui/styles";
-import {findOrganizationAll} from "../../components/api/services/OrganizationsService";
+import {withStyles} from "@material-ui/styles";
 import Table from "@material-ui/core/Table";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
@@ -10,10 +9,14 @@ import TableBody from "@material-ui/core/TableBody";
 import IconButton from "@material-ui/core/IconButton";
 import AddIcon from '@material-ui/icons/Add';
 import CreateIcon from '@material-ui/icons/Create';
-import OrganizationDialog from "./dialogs/OrganizationDialog";
+import RemoveIcon from '@material-ui/icons/Remove';
+import {bindActionCreators} from "redux";
+import * as organizationsAction from "../actions/OrganizationsAction";
+import {connect} from "react-redux";
+import {deleteOrganization} from "../../components/api/services/OrganizationsService";
 
 
-const useStyles = makeStyles(
+const OrganizationsPage = withStyles (
     theme => (
         {
             a: {
@@ -33,90 +36,121 @@ const useStyles = makeStyles(
             }
         }
     )
-);
-
-export default function OrganizationsPage(
-    {
-        history
-    }
-){
-    const classes = useStyles();
-    const [organizations, setOrganizations] = useState([]);
-    const [loading, setLoading] = useState(false);
-    const [loaded, setLoaded] = useState(false);
-
-    useEffect(
-        () => {
-            setLoading(true);
-            if (!loaded){
-                if (!loading){
-                    console.log("load");
-                    findOrganizationAll().then(
-                        repsponse => {
-                            setOrganizations(repsponse.data);
-                            setLoading(false);
-                            setLoaded(true);
-                        }
-                    )
+)(
+    (
+        {
+            classes
+            , history
+            , organizationsReducers
+            , organizationsAction
+        }
+    ) => {
+        useEffect(
+            () => {
+                if (!organizationsReducers.records && !organizationsReducers.loading && !organizationsReducers.loaded){
+                    organizationsAction.load();
                 }
             }
+        )
+
+        const removeOrganization = (organization) => {
+
+            deleteOrganization(
+                organization
+            ).then(
+                response => {
+                    organizationsAction.replace(
+                        [
+                            ...organizationsReducers.records.filter(
+                                item => item.id !== organization.id
+                            )
+                        ]
+                    )
+                }
+            )
         }
-    )
 
-
-    return (
-        <div>
-            <Grid container
-                  direction="column"
-                  justify="center"
-                  alignItems="stretch"
-            >
-                <Grid item
-                      xs={12}
+        return (
+            <div>
+                <Grid container
+                      direction="column"
+                      justify="center"
+                      alignItems="stretch"
                 >
-                    <Table>
-                        <TableHead>
-                            <TableRow>
-                                <TableCell align="center">
-                                    Наименование
-                                </TableCell>
-                                <TableCell align="center">
-                                    Тип
-                                </TableCell>
-                                <TableCell align="right">
-                                    <IconButton href="#organization">
-                                        <AddIcon />
-                                    </IconButton>
-                                    <IconButton onClick={()=>history.push('/organization/1')}>
-                                        <AddIcon />
-                                    </IconButton>
-                                </TableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {
-                                organizations.map(
-                                    organization => (
-                                        <TableRow>
-                                            <TableCell align="center">
-                                                Наименование
-                                            </TableCell>
-                                            <TableCell align="center">
-                                                Тип
-                                            </TableCell>
-                                            <TableCell align="right">
-                                                <IconButton>
-                                                    <CreateIcon />
-                                                </IconButton>
-                                            </TableCell>
-                                        </TableRow>
+                    <Grid item
+                          xs={12}
+                    >
+                        <Table>
+                            <TableHead>
+                                <TableRow>
+                                    <TableCell align="center">
+                                        Наименование
+                                    </TableCell>
+                                    <TableCell align="center">
+                                        Тип
+                                    </TableCell>
+                                    <TableCell align="right">
+                                        <IconButton href="#organization">
+                                            <AddIcon />
+                                        </IconButton>
+                                    </TableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                {
+                                    organizationsReducers.records &&
+                                    organizationsReducers.records.map(
+                                        organization => (
+                                            <TableRow>
+                                                <TableCell align="center">
+                                                    {
+                                                        organization.packName
+                                                    }
+                                                </TableCell>
+                                                <TableCell align="center">
+                                                    Тип
+                                                </TableCell>
+                                                <TableCell align="right">
+                                                    <Grid container
+                                                          justify="space-between"
+                                                          alignItems="center"
+                                                          direction={"row"}
+                                                    >
+                                                        <Grid item>
+                                                            <IconButton onClick={()=>history.push('/organization/' + organization.id)}>
+                                                                <CreateIcon />
+                                                            </IconButton>
+                                                        </Grid>
+                                                        <Grid item>
+                                                            <IconButton onClick={()=>removeOrganization(organization)}>
+                                                                <RemoveIcon />
+                                                            </IconButton>
+                                                        </Grid>
+                                                    </Grid>
+                                                </TableCell>
+                                            </TableRow>
+                                        )
                                     )
-                                )
-                            }
-                        </TableBody>
-                    </Table>
+                                }
+                            </TableBody>
+                        </Table>
+                    </Grid>
                 </Grid>
-            </Grid>
-        </div>
-    );
+            </div>
+        );
+    }
+)
+
+const mapStateToProps = state => {
+    return {
+        organizationsReducers: state.organizationsReducers,
+    }
 }
+
+const mapDispatchToProps = dispatch => {
+    return {
+        organizationsAction: bindActionCreators({...organizationsAction}, dispatch),
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(OrganizationsPage);

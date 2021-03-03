@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="omityushin" id="person_document_types-values-0001-01">
+        <sql>
+            insert into person_document_types(
+            person_document_type_id, meaning, template, CREATED_BY, CREATION_DATE, LAST_UPDATED_BY, LAST_UPDATE_DATE, object_version_number
+            )
+            values
+            ('03', 'Свидетельство о рождении', 'SSSSSSSSSSSSSSSSSSSSSSSSS', '1', current_timestamp, '1', current_timestamp, 1),
+            ('10', 'Паспорт иностранного гражданина', 'SSSSSSSSSSSSSSSSSSSSSSSSS', '1',  current_timestamp, '1', current_timestamp, 1),
+            ('12', 'Вид на жительство в Российской Федерации', 'SSSSSSSSSSSSSSSSSSSSSSSSS', '1',  current_timestamp, '1', current_timestamp, 1),
+            ('14', 'Временное удостоверение личности гражданина Российской Федерации', 'SSSSSSSSSSSSSSSSSSSSSSSSS', '1',  current_timestamp, '1', current_timestamp, 1),
+            ('15', 'Разрешение на временное проживание в Российской Федерации', null, '1',  current_timestamp, '1', current_timestamp, 1),
+            ('19', 'Свидетельство о предоставлении временного убежища на территории РФ(1)', 'ББ-999 9999999', '1',  current_timestamp, '1', current_timestamp, 1),
+            ('21', 'Паспорт гражданина Российской Федерации', '99 99 9999990', '1',  current_timestamp, '1', current_timestamp, 1),
+            ('22', 'Загранпаспорт гражданина Российской Федерации', '99 9999999', '1',  current_timestamp, '1', current_timestamp, 1);
+        </sql>
+    </changeSet>
+</databaseChangeLog>

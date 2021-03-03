@@ -16,7 +16,7 @@ public class PeopleService {
         PersonEntity personEntity = new PersonEntity();
         personEntity.setLastName("Митюшин");
         personEntity.setFirstName("Олег");
-        personEntity.setVersion(1L);
+        personEntity.setObjectVersionNumber(1L);
         peopleRepository.save(personEntity);
     }
 }

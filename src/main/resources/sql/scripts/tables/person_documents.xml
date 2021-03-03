@@ -3,16 +3,23 @@
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
 
-    <changeSet author="omityushin" id="organization_aliases">
-        <createTable schemaName="player_events" tableName="organization_aliases" remarks="тип организации">
-            <column name="organization_alias_id" remarks="Уникальный ID записи" type="bigint" autoIncrement="true">
+    <changeSet author="omityushin" id="person_documents">
+        <createTable schemaName="player_events" tableName="person_documents" remarks="Документы">
+            <column name="person_document_id" remarks="Уникальный ID записи" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="organization_id" remarks="Организация" type="bigint">
+            <column name="person_document_type_id" remarks="Уникальный ID записи" type="varchar(2)">
                 <constraints nullable="false"/>
             </column>
-            <column name="meaning" remarks="Наименоавние" type="varchar(150)">
-                <constraints nullable="false"/>
+            <column name="series" remarks="Серия" type="varchar(10)">
+            </column>
+            <column name="number" remarks="номер" type="varchar(6)">
+            </column>
+            <column name="issued" remarks="кем выдан" type="varchar(150)">
+            </column>
+            <column name="issued_date" remarks="когда выдан" type="DATE">
+            </column>
+            <column name="code_organization" remarks="номер" type="varchar(6)">
             </column>
 
             <column name="CREATION_DATE" remarks="Дата создания" type="DATETIME">
@@ -30,13 +37,10 @@
             <column name="OBJECT_VERSION_NUMBER" remarks="версия" type="bigint">
                 <constraints nullable="false"/>
             </column>
-
             <column name="delete_date" remarks="Дата удаления" type="DATETIME">
                 <constraints nullable="true"/>
             </column>
+
         </createTable>
-        <createIndex tableName="organization_aliases" indexName="organization_aliases_n1">
-            <column name="organization_id"/>
-        </createIndex>
     </changeSet>
 </databaseChangeLog>

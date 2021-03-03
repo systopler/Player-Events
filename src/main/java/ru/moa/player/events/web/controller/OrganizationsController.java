@@ -14,8 +14,8 @@ import java.util.List;
 @Slf4j
 @AllArgsConstructor
 @RestController
-@RequestMapping(value = "/organizations")
 @Transactional
+@RequestMapping(value = "/organizations")
 public class OrganizationsController {
     private final OrganizationsService organizationsService;
     private final OrganizationTypesService organizationTypesService;
@@ -36,11 +36,17 @@ public class OrganizationsController {
         return organizationTypesService.convert(organizationTypesService.findAll());
     }
 
-
     @PostMapping("/save")
     public OrganizationDto save(
             @RequestBody OrganizationDto organizationDto
     ){
         return organizationsService.convert(organizationsService.save(organizationDto));
+    }
+
+    @DeleteMapping("/delete")
+    public void delete(
+            @RequestBody OrganizationDto organizationDto
+    ){
+        organizationsService.delete(organizationDto);
     }
 }

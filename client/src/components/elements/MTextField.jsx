@@ -31,8 +31,8 @@ const theme = createMuiTheme(
                 input : {
                     minHeight : 18.909,
                     paddingLeft: '3px',
-                    paddingTop: '0px',
-                    paddingBottom: '0px',
+                    paddingTop: '6px',
+                    paddingBottom: '6px',
                     paddingRight: '0px',
                     borderRadius: 0,
                     fontSize: 13,
@@ -58,7 +58,6 @@ class MTextField extends React.Component{
     static defaultProps = {
         type: 'text',
         fullWidth : false,
-        style : {},
         multiline : false,
         rows : 1,
     }

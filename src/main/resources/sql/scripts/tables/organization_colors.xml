@@ -3,15 +3,15 @@
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
 
-    <changeSet author="omityushin" id="organization_aliases">
-        <createTable schemaName="player_events" tableName="organization_aliases" remarks="тип организации">
-            <column name="organization_alias_id" remarks="Уникальный ID записи" type="bigint" autoIncrement="true">
+    <changeSet author="omityushin" id="organization_colors">
+        <createTable schemaName="player_events" tableName="organization_colors" remarks="цвета организации">
+            <column name="organization_color_id" remarks="Уникальный ID записи" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="organization_id" remarks="Организация" type="bigint">
                 <constraints nullable="false"/>
             </column>
-            <column name="meaning" remarks="Наименоавние" type="varchar(150)">
+            <column name="color" remarks="цвет" type="bigint">
                 <constraints nullable="false"/>
             </column>
 
@@ -35,7 +35,7 @@
                 <constraints nullable="true"/>
             </column>
         </createTable>
-        <createIndex tableName="organization_aliases" indexName="organization_aliases_n1">
+        <createIndex tableName="organization_colors" indexName="organization_colors_n1">
             <column name="organization_id"/>
         </createIndex>
     </changeSet>

@@ -3,17 +3,17 @@ package ru.moa.player.events.service;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.moa.player.events.db.entity.OrganizationEntity;
+import ru.moa.player.events.db.repository.OrganizationTypeRepository;
 import ru.moa.player.events.db.repository.OrganizationsRepository;
 import ru.moa.player.events.exception.NotFoundException;
-import ru.moa.player.events.exception.OptimisticLockException;
 import ru.moa.player.events.web.transfer.OrganizationDto;
+import ru.moa.player.events.web.transfer.OrganizationTypeDto;
 
 import javax.persistence.criteria.Predicate;
-import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,6 +24,7 @@ import java.util.stream.Collectors;
 public class OrganizationsService {
     private final MessageService messageService;
     private final OrganizationsRepository organizationsRepository;
+    private final OrganizationTypeRepository organizationTypeRepository;
     private final ModelMapper modelMapper;
 
     public OrganizationEntity convert(OrganizationDto organizationDto){
@@ -37,7 +38,20 @@ public class OrganizationsService {
         if (organizationEntity == null){
             return null;
         }
-        return modelMapper.map(organizationEntity, OrganizationDto.class);
+        OrganizationDto result = new OrganizationDto();
+        result.setFullName(organizationEntity.getFullName());
+        result.setPackName(organizationEntity.getPackName());
+        result.setCreatedBy(organizationEntity.getCreatedBy());
+        result.setObjectVersionNumber(organizationEntity.getObjectVersionNumber());
+        result.setCreationDate(organizationEntity.getCreationDate());
+        result.setId(organizationEntity.getId());
+
+        if (organizationEntity.getOrganizationType() != null){
+            result.setOrganizationType(modelMapper.map(organizationEntity.getOrganizationType(), OrganizationTypeDto.class));
+        }
+
+
+        return result;
     }
 
     public List<OrganizationDto> convert(List<OrganizationEntity> organizationEntityList){
@@ -68,16 +82,33 @@ public class OrganizationsService {
     }
 
     public OrganizationEntity save(OrganizationDto organizationDto){
+        OrganizationEntity organizationEntity;
         if (organizationDto.getId() != null){
-            OrganizationEntity organizationEntityOld = organizationsRepository.getOne(organizationDto.getId());
-            if (organizationEntityOld == null){
-                throw new NotFoundException(messageService.getMessage("entity.not.found.exception"));
-            } else {
-                if (organizationEntityOld.getVersion().longValue() != organizationDto.getVersion().longValue()){
-                    throw new OptimisticLockException(MessageFormat.format("Stale entity {0}: applied version {1}, but current version is {2}", this.getClass().getSimpleName(), organizationDto.getVersion(), organizationEntityOld.getVersion()));
-                }
-            }
+            organizationEntity = findById(organizationDto.getId());
+            organizationEntity.applyObjectVersionNumber(organizationDto.getObjectVersionNumber());
+            organizationEntity.setObjectVersionNumber(organizationEntity.getObjectVersionNumber() + 1);
+        } else {
+            organizationEntity = new OrganizationEntity();
+            organizationEntity.setObjectVersionNumber(1L);
         }
-        return organizationsRepository.save(modelMapper.map(organizationDto, OrganizationEntity.class));
+
+        organizationEntity.setPackName(organizationDto.getPackName());
+        organizationEntity.setFullName(organizationDto.getFullName());
+
+
+        if (organizationDto.getOrganizationType() != null){
+            organizationEntity.setOrganizationType(organizationTypeRepository.findById(organizationDto.getOrganizationType().getId()).orElse(null));
+        }
+
+
+
+        //return organizationEntity;
+        return organizationsRepository.saveAndFlush(organizationEntity);
+    }
+
+    public void delete(OrganizationDto organizationDto){
+        OrganizationEntity organizationEntity = findById(organizationDto.getId());
+        organizationEntity.applyObjectVersionNumber(organizationDto.getObjectVersionNumber());
+        organizationsRepository.delete(organizationEntity);
     }
 }

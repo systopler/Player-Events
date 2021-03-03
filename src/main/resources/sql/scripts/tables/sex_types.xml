@@ -9,6 +9,7 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="meaning" remarks="значение" type="varchar(20)">
+                <constraints nullable="false"/>
             </column>
 
             <column name="CREATION_DATE" remarks="Дата создания" type="DATETIME">

@@ -4,7 +4,7 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
 
     <changeSet author="omityushin" id="jos_kladr_socrbase">
-        <createTable schemaName="master" tableName="jos_kladr_socrbase" remarks="кладр сокращение">
+        <createTable schemaName="player_events" tableName="jos_kladr_socrbase" remarks="кладр сокращение">
             <column name="level" remarks="Уровень" type="bigint" />
             <column name="scname" remarks="сокращение" type="varchar(30)" />
             <column name="socrname" remarks="расшифровка" type="varchar(150)" />

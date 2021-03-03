@@ -4,7 +4,7 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
 
     <changeSet author="omityushin" id="address_01">
-        <createTable schemaName="master" tableName="addresses" remarks="контактная информация">
+        <createTable schemaName="player_events" tableName="addresses" remarks="контактная информация">
             <column name="address_id" remarks="Уникальный ID записи" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -12,7 +12,7 @@
             </column>
             <column name="object_id" remarks="id владельца" type="bigint">
             </column>
-            <column name="address_type" remarks="тип объекта" type="bigint">
+            <column name="address_type" remarks="тип адреса" type="bigint">
             </column>
             <column name="region" remarks="регион" type="varchar(13)">
             </column>

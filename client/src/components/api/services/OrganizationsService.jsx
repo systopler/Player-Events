@@ -16,3 +16,23 @@ export function findOrganizationTypesAll(){
         '/organizations/types'
     );
 }
+
+export function saveOrganization(organization){
+    return axios.post(
+        '/organizations/save'
+        ,{
+            ...organization
+        }
+    );
+}
+
+export function deleteOrganization(organization){
+    return axios.delete(
+        '/organizations/delete'
+        ,{
+            data : {
+                ...organization
+            }
+        }
+    );
+}
